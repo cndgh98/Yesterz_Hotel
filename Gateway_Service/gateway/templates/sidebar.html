@@ -1,0 +1,21 @@
+{% block sidebar %}
+    <div class = "font my-4 p-3">
+        <p class="mr-3 h2 text-center">Find hotel:</p>
+        <select class="btn btn-outline-secondary" id="selecttheme"
+                style="height: 40px; width: 100%; background-color: #f8f9fa; border-color: #dce0e5;">
+            <option onclick="document.getElementById('city').value='';">Choose city</option>
+            {% for city in cities %}
+                <option onclick="document.getElementById('city').value='{{ city.cities }}';">{{ city.cities }}</option>
+            {% endfor %}
+        </select>
+        <form action="{% url 'search' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="city" id="city" class="form-control bg-light" value="" style="display: none"/><br>
+            <label>Arrival date</label>
+            <input type="date" name="date_start" id="date_start" class="form-control bg-light" required/><br>
+            <label>Departure date</label>
+            <input type="date" name="date_end" id="date_end" class="form-control bg-light" required/><br>
+            <input type="submit" class="btn btn-outline-secondary btn-block" value="Search">
+        </form>
+    </div>
+{% endblock %}

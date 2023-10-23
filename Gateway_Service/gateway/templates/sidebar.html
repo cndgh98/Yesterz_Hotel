@@ -2,7 +2,7 @@
     <div class = "font my-4 p-3">
         <p class="mr-3 h2 text-center">호텔 검색:</p>
         <select class="btn btn-outline-secondary" id="selecttheme"
-                style="height: 40px; width: 100%; background-color: #a6a6a6; border-color: #dce0e5;">
+                style="height: 40px; width: 100%; background-color: #a6a6a6; border-color: #dce0e5;" onchange="updateCityValue(this);">
             <option onclick="document.getElementById('city').value='';">도시선택</option>
             {% for city in cities %}
                 <option onclick="document.getElementById('city').value='{{ city.cities }}';">{{ city.cities }}</option>
@@ -17,5 +17,12 @@
             <input type="date" name="date_end" id="date_end" class="form-control bg-light" required/><br>
             <input type="submit" class="btn btn-outline-secondary btn-block" value="Search">
         </form>
+        <script>
+            function updateCityValue(selectElement) {
+                var cityInput = document.getElementById('city');
+                var selectedCity = selectElement.value;
+                cityInput.value = selectedCity;
+            }
+        </script>
     </div>
 {% endblock %}

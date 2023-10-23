@@ -59,10 +59,10 @@ def login(request):  #
     if session.status_code != 200:
         return JsonResponse(session.json(), status=status.HTTP_400_BAD_REQUEST)
     response = JsonResponse({'success': 'logined'}, status=status.HTTP_200_OK)
-    q_session = session.json()
-    q_session.update({"username": request.data["username"],
-                      "date": dt.now(tz_MOS).strftime('%Y-%m-%d %H:%M:%S %Z%z')})
-    producer(q_session, '41pfiknb-users')
+    # q_session = session.json()
+    # q_session.update({"username": request.data["username"],
+    #                   "date": dt.now(tz_MOS).strftime('%Y-%m-%d %H:%M:%S %Z%z')})
+    # producer(q_session, '41pfiknb-users')
     response.set_cookie(key='jwt', value=session.cookies.get('jwt'), httponly=True)
     return response
 
@@ -88,9 +88,9 @@ def register(request):  #
     loyalty = requests.post(f"http://{HOST_ADDRESS}:8000/api/v1/loyalty/create", json=request.data)
     if loyalty.status_code != 200:
         return JsonResponse(loyalty.json(), status=status.HTTP_400_BAD_REQUEST)
-    q_session = {"username": request.data["username"], "detail": 'Register',
-                 "date": dt.now(tz_MOS).strftime('%Y-%m-%d %H:%M:%S %Z%z')}
-    producer(q_session, '41pfiknb-users')
+    # q_session = {"username": request.data["username"], "detail": 'Register',
+    #              "date": dt.now(tz_MOS).strftime('%Y-%m-%d %H:%M:%S %Z%z')}
+    # producer(q_session, '41pfiknb-users')
     return JsonResponse({'success': 'register & create loyalty'}, status=status.HTTP_200_OK)
 
 
@@ -108,9 +108,9 @@ def logout(request):  #
     user = requests.get(f"http://{HOST_ADDRESS}:8001/api/v1/session/user/{session.json()['user_uid']}",
                     cookies=request.COOKIES).json()
 
-    q_session = {"username": user["username"], "detail": 'Logout',
-                 "date": dt.now(tz_MOS).strftime('%Y-%m-%d %H:%M:%S %Z%z')}
-    producer(q_session, '41pfiknb-users')
+    # q_session = {"username": user["username"], "detail": 'Logout',
+    #              "date": dt.now(tz_MOS).strftime('%Y-%m-%d %H:%M:%S %Z%z')}
+    # producer(q_session, '41pfiknb-users')
     response.delete_cookie('jwt')
     return response
 

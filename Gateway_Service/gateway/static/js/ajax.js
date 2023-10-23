@@ -1,5 +1,5 @@
 function del_booking(){
-    var data = confirm("Are you sure you want to cancel your reservation?");
+    var data = confirm("예약을 취소하겠습니까?");
 }
 $(document).ready(function(){
     $.each($('.hotlikes-button'), function(){
@@ -114,17 +114,17 @@ $('.comment_update').click(function(){
 });
 
 $('.comment_delete').click(function(){
-    var dat = confirm('Are you sure you want to delete comment?');
+    var dat = confirm('댓글을 삭제하겠습니까?');
     var comment = $(this).attr("data-ans");
     if(dat){
         $.post('/delete_comment',{comment_uid: comment}, function(data) {
             console.log(data);
             if (data.commessage === 'success deleted'){
-                alert('Comment deleted');
+                alert('댓글 삭제 완료');
                 location.reload();
             }
             else {
-                alert('Deletion error');
+                alert('삭제 오류');
             }
         });
     }

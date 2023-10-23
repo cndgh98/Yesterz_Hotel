@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    Personal account
+    마이페이지
 {% endblock %}
 
 {% block content %}
@@ -58,29 +58,29 @@
                 {% for book, hotel, pay in currbookhot %}
                     {% if pay.status == "NEW" %}
                     <div class = "font my-4 p-2">
-                        <a href={% url 'booking_info' book.booking_uid %}><h3>Hotel's reservations {{ hotel.title }}</h3></a>
+                        <a href={% url 'booking_info' book.booking_uid %}><h3>호텔명: {{ hotel.title }}</h3></a>
                         <p class="d-inline-block text-truncate" style="max-width:800px;">{{ book.date_start }} - {{ book.date_end }}</p>
                         <div class="row">
                             <div class="col-8">
-                                <p>Address: {{ hotel.cities }}, {{ hotel.location }}</p>
-                                <p style="font-weight: bold">Payment required</p>
+                                <p>주소: {{ hotel.cities }}, {{ hotel.location }}</p>
+                                <p style="font-weight: bold">결재 대기중</p>
                             </div>
                             <div class="col-4">
-                                <p>Created {{ book.date_create }}</p>
+                                <p>생성날짜: {{ book.date_create }}</p>
                             </div>
                         </div>
                     </div>
                     {% else %}
                     <div class = "font my-4 p-2">
-                        <a href={% url 'booking_info' book.booking_uid %}><h3>Hotel's reservations {{ hotel.title }}</h3></a>
+                        <a href={% url 'booking_info' book.booking_uid %}><h3>호텔명: {{ hotel.title }}</h3></a>
                         <p class="d-inline-block text-truncate" style="max-width:800px;">{{ book.date_start }} - {{ book.date_end }}</p>
                         <div class="row">
                             <div class="col-8">
-                                <p>Address: {{ hotel.cities }}, {{ hotel.location }}</p>
-                                <p style="font-weight: bold">Paid</p>
+                                <p>주소: {{ hotel.cities }}, {{ hotel.location }}</p>
+                                <p style="font-weight: bold">결재 완료</p>
                             </div>
                             <div class="col-4">
-                                <p>Created {{ book.date_create }}</p>
+                                <p>생성날짜: {{ book.date_create }}</p>
                             </div>
                         </div>
                     </div>
@@ -92,29 +92,29 @@
                 {% for book, hotel, pay in histbookhot %}
                     {% if pay.status == "CANCELED" %}
                     <div class = "font my-4 p-2">
-                        <a href={% url 'booking_info' book.booking_uid %}><h3>Hotel's reservations {{ hotel.title }}</h3></a>
+                        <a href={% url 'booking_info' book.booking_uid %}><h3>호텔명: {{ hotel.title }}</h3></a>
                         <p class="d-inline-block text-truncate" style="max-width:800px;">{{ book.date_start }} - {{ book.date_end }}</p>
                         <div class="row">
                             <div class="col-8">
-                                <p>Address: {{ hotel.cities }}, {{ hotel.location }}</p>
+                                <p>주소: {{ hotel.cities }}, {{ hotel.location }}</p>
                                 <p style="font-weight: bold">Canceled</p>
                             </div>
                             <div class="col-4">
-                                <p>Created {{ book.date_create }}</p>
+                                <p>생성날짜: {{ book.date_create }}</p>
                             </div>
                         </div>
                     </div>
                     {% else %}
                     <div class = "font my-4 p-2">
-                        <a href={% url 'booking_info' book.booking_uid %}><h3>Hotel's reservations {{ hotel.title }}</h3></a>
+                        <a href={% url 'booking_info' book.booking_uid %}><h3>호텔명: {{ hotel.title }}</h3></a>
                         <p class="d-inline-block text-truncate" style="max-width:800px;">{{ book.date_start }} - {{ book.date_end }}</p>
                         <div class="row">
                             <div class="col-8">
-                                <p>Address: {{ hotel.cities }}, {{ hotel.location }}</p>
+                                <p>주소: {{ hotel.cities }}, {{ hotel.location }}</p>
                                 <p style="font-weight: bold">Funds reversed</p>
                             </div>
                             <div class="col-4">
-                                <p>Created {{ book.date_create }}</p>
+                                <p>생성날짜: {{ book.date_create }}</p>
                             </div>
                         </div>
                     </div>

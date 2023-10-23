@@ -22,7 +22,7 @@ def create(request):
           }
     """
     try:
-        data = {"user_uid": request.data["user_uid"], "status_loyalty": "None", "discount": "0", "balance": "50000"}
+        data = {"user_uid": request.data["user_uid"], "status_loyalty": "None", "discount": "0", "balance": "90000000"}
         serializer = LoyaltySerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()

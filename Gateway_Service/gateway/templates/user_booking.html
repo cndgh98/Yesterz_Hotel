@@ -5,14 +5,14 @@
 <div class="col-8 mt-3">
     {% if bookdel %}
         <div class="alert alert-success">{{ bookdel }}</div>
-        <a href="{% url 'index' %}" class="btn btn-info">To start page</a>
-        <a href="{% url 'balance' %}" class="btn btn-info">Personal Area</a>
+        <a href="{% url 'index' %}" class="btn btn-info">메인페이지</a>
+        <a href="{% url 'balance' %}" class="btn btn-info">마이페이지</a>
     {% elif bookerror %}
         <div class="alert alert-danger">{{ bookerror }}</div>
             <input type="button" class="btn btn-outline-secondary" onclick="history.back();" value="Назад"/>
     {% else %}
         <div class="p-2 my-3">
-            <h4 class=" text-center text-wrap text-break" style="font-weight: bold">Hotel reservation
+            <h4 class=" text-center text-wrap text-break" style="font-weight: bold">호텔 예약
                 <a href={% url 'hotel_info' hotel.hotel_uid %}><h4 style="font-weight: bold">{{hotel.title}}</h4></a>
             </h4>
         </div>
@@ -25,31 +25,31 @@
             {% endif %}
             <table class = "table">
                 <tr>
-                    <th scope="col" class="w-25" style="border: none;">City:</th>
+                    <th scope="col" class="w-25" style="border: none;">지역:</th>
                     <td style="border: none;">{{ hotel.cities }}</td>
                 </tr>
                 <tr>
-                    <th scope="col" class="w-25">Address:</th>
+                    <th scope="col" class="w-25">주소:</th>
                     <td>{{ hotel.location }}</td>
                 </tr>
                 <tr>
-                    <th scope="col" class="w-25">Arrival date:</th>
+                    <th scope="col" class="w-25">출발 날짜:</th>
                     <td>{{ booking.date_start }}</td>
                 </tr>
                 <tr>
-                    <th scope="col" class="w-25">Departure date:</th>
+                    <th scope="col" class="w-25">도착 날짜:</th>
                     <td>{{ booking.date_end }}</td>
                 </tr>
                 <tr>
-                    <th scope="col" class="w-25">Comment:</th>
+                    <th scope="col" class="w-25">요청사항:</th>
                     <td>{{ booking.comment }}</td>
                 </tr>
                 <tr>
-                    <th scope="col" class="w-25">Booking changed:</th>
+                    <th scope="col" class="w-25">예약 날짜:</th>
                     <td>{{ booking.date_create }}</td>
                 </tr>
                 <tr>
-                    <th scope="col" class="w-25">Status:</th>
+                    <th scope="col" class="w-25">비고:</th>
                     <td>{{ payment.status }}</td>
                 </tr>
                 {% if payment.status == "PAID" %}
@@ -60,7 +60,7 @@
                 {% endif %}
             </table>
             {% if payment.status == "NEW" %}
-                <h3>To pay: {{ totalcost }}</h3>
+                <h3>지불 요금: {{ totalcost }}</h3>
             {% endif %}
             <div class="row">
                 {% if payment.status == "NEW" %}
@@ -69,7 +69,7 @@
                             {% csrf_token %}
                             <input type="hidden" name="booking_uid" value="{{ booking.booking_uid }}">
                             <input type="hidden" name="totalcost" value="{{ totalcost }}">
-                            <input type="submit" class="btn btn-success mr-2" value="Pay">
+                            <input type="submit" class="btn btn-success mr-2" value="결제하기">
                         </form>
                     </div>
                 {% endif %}
@@ -81,7 +81,7 @@
                             <input type="hidden" name="booking" value="{{ booking }}">
                             <input type="hidden" name="hotel" value="{{ hotel }}">
                             <input type="hidden" name="payment" value="{{ payment }}">
-                            <input type="submit" onclick="del_booking()" class="btn btn-danger" value="Close reservation">
+                            <input type="submit" onclick="del_booking()" class="btn btn-danger" value="예약 취소">
                         </form>
                     </div>
                 {% elif payment.status == "PAID" %}
@@ -92,7 +92,7 @@
                             <input type="hidden" name="booking" value="{{ booking }}">
                             <input type="hidden" name="hotel" value="{{ hotel }}">
                             <input type="hidden" name="payment" value="{{ payment }}">
-                            <input type="submit" onclick="del_booking()" class="btn btn-danger" value="Close reservation">
+                            <input type="submit" onclick="del_booking()" class="btn btn-danger" value="예약 취소">
                         </form>
                     </div>
                 {% endif %}
@@ -100,7 +100,7 @@
 
         {% endif %}
         </div>
-        <a href="{% url 'balance' %}" class="btn btn-info">My reservations</a>
+        <a href="{% url 'balance' %}" class="btn btn-info">내 예약 보기</a>
     {% endif %}
 </div>
 {% endblock %}

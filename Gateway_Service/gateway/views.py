@@ -740,11 +740,11 @@ def del_booking(request, booking_uid):
         if request.POST['status'] == "NEW":
             delbook = requests.delete(f"http://{HOST_ADDRESS}:8003/api/v1/booking/canceled/{booking_uid}", cookies=request.COOKIES)
             if delbook.status_code == 200:
-                success = "Booking deleted"
+                success = "예약 취소 완료"
                 response = render(request, 'user_booking.html', {'bookdel': success, 'cities': cities, 'user': data})
                 # response = HttpResponseRedirect('/balance')
             else:
-                error = "Something went wrong, please try again"
+                error = "문제가 발생하였습니다. 잠시 후 다시 시도하세요"
                 response = render(request, 'user_booking.html', {'booking': book, 'cities': cities, 'hotel': hot,
                                                                  'payment': pay, 'error': error, 'user': data})
         else:

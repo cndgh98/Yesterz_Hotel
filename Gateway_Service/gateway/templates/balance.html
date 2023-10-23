@@ -12,7 +12,7 @@
     {% else %}
         <div class="col-8 mt-3">
             <div class="p-1 my-1">
-                <h3 style="text-align: center; margin-bottom: 6px;">Sky <b>ID</b></h3>
+                <h3 style="text-align: center; margin-bottom: 6px;">사용자 <b>정보</b></h3>
             </div>
             <table class="table" style="border-color: white;">
                 <tbody class="font">
@@ -20,10 +20,10 @@
                     <td style="border-color: #efeeee;">
                         <div style="margin: 10px;">
                             <h3 style="margin-bottom: 20px;">{{ user.last_name }} {{ user.name }}</h3>
-                            <h4><b>E-mail:</b></h4>
-                            <h4><b>Status:</b></h4>
-                            <h4><b>Level discount:</b></h4>
-                            <h4><b>Balance:</b></h4>
+                            <h4><b>이메일:</b></h4>
+                            <h4><b>진행 상황:</b></h4>
+                            <h4><b>등급 할인:</b></h4>
+                            <h4><b>잔액:</b></h4>
                         </div>
 
                     <td style="border-color: #efeeee;">
@@ -39,19 +39,19 @@
                 </tbody>
             </table>
             <div class="text-center">
-                <h3 style="font-weight: bold">My reservations</h3>
+                <h3 style="font-weight: bold">내 예약 현황</h3>
             </div>
             <div class="btn-group btn-block px-1">
                 <button id="example_2_2" onclick="document.getElementById('example_2').style.display='block';
                                                  document.getElementById('example_4').style.display='none';
                                                  document.getElementById('example_2_2').className='btn btn-outline-secondary active';
                                                  document.getElementById('example_4_4').className='btn btn-outline-secondary';"
-                                                 class="btn btn-outline-secondary active">Valid reservations</button>
+                                                 class="btn btn-outline-secondary active">현재 예약</button>
                 <button id="example_4_4" onclick="document.getElementById('example_2').style.display='none';
                                                   document.getElementById('example_4').style.display='block';
                                                   document.getElementById('example_4_4').className='btn btn-outline-secondary active';
                                                   document.getElementById('example_2_2').className='btn btn-outline-secondary';"
-                                                  class="btn btn-outline-secondary">History reservations</button>
+                                                  class="btn btn-outline-secondary">이전 예약</button>
             </div>
             <div id="example_2" style="display: block">
             <hr>

@@ -14,12 +14,15 @@ import datetime
 import json
 import jwt
 import pytz
+import os
 
 FAILURES = 3
 TIMEOUT = 6
 
+HOST_ADDRESS = os.environ.get('HOST_ADDRESS')
+
 # Time zone
-tz_MOS = pytz.timezone('Europe/Moscow')
+tz_MOS = pytz.timezone('Asia/Seoul')
 
 
 def utc_to_local(utc_dt):
@@ -46,7 +49,7 @@ def create_or_all(request):
     try:
         data = auth(request)
         if request.method == 'POST':
-            payBalance = requests.post("https://hotels-payment-chernov.herokuapp.com/api/v1/payment/create",
+            payBalance = requests.post(f"http://{HOST_ADDRESS}:8005/api/v1/payment/create",
                                        json={"price": request.data["price"]}, cookies=request.COOKIES)
             if payBalance.status_code != 200:
                 return JsonResponse({'error': 'Error in payment'}, status=status.HTTP_400_BAD_REQUEST)
@@ -67,13 +70,13 @@ def create_or_all(request):
             users_reservations = json.loads(serializers.serialize('json', reservations))
             for res in users_reservations:
                 payBalance = requests.get(
-                    "https://hotels-payment-chernov.herokuapp.com/api/v1/payment/status/{}".format(res['fields'].get("payment_uid")),
+                    f"http://{HOST_ADDRESS}:8005/api/v1/payment/status/{{}}".format(res['fields'].get("payment_uid")),
                     cookies=request.COOKIES)
                 if payBalance.status_code == 200:
                     payBalance = payBalance.json()
                     res['fields'].update(payBalance)
                 hotel = requests.get(
-                    "https://hotels-payment-chernov.herokuapp.com/api/v1/hotel/status/{}".format(res['fields'].get("hotel_uid")),
+                    f"http://{HOST_ADDRESS}:8005/api/v1/hotel/status/{{}}".format(res['fields'].get("hotel_uid")),
                     cookies=request.COOKIES)
                 if hotel.status_code == 200:
                     hotel = hotel.json()
@@ -92,7 +95,7 @@ def canceled(request, booking_uid):
     try:
         auth(request)
         payment_uid = Reservations.objects.get(booking_uid=booking_uid).payment_uid
-        payStatus = requests.delete("https://hotels-payment-chernov.herokuapp.com/api/v1/payment/close/{}".format(payment_uid),
+        payStatus = requests.delete(f"http://{HOST_ADDRESS}:8005/api/v1/payment/close/{{}}".format(payment_uid),
                                     cookies=request.COOKIES)
         if payStatus.status_code == 200:
             return JsonResponse(payStatus.json(), status=status.HTTP_200_OK)
@@ -107,7 +110,7 @@ def pay(request, booking_uid):
     try:
         auth(request)
         payment_uid = Reservations.objects.get(booking_uid=booking_uid).payment_uid
-        payStatus = requests.post("https://hotels-payment-chernov.herokuapp.com/api/v1/payment/pay/{}".format(payment_uid),
+        payStatus = requests.post(f"http://{HOST_ADDRESS}:8005/api/v1/payment/pay/{{}}".format(payment_uid),
                                   cookies=request.COOKIES)
         if payStatus.status_code == 200:
             return JsonResponse(payStatus.json(), status=status.HTTP_200_OK)
@@ -122,7 +125,7 @@ def reversed(request, booking_uid):
     try:
         auth(request)
         payment_uid = Reservations.objects.get(booking_uid=booking_uid).payment_uid
-        payStatus = requests.post("https://hotels-payment-chernov.herokuapp.com/api/v1/payment/reversed/{}".format(payment_uid),
+        payStatus = requests.post(f"http://{HOST_ADDRESS}:8005/api/v1/payment/reversed/{{}}".format(payment_uid),
                                   cookies=request.COOKIES)
         if payStatus.status_code == 200:
             return JsonResponse(payStatus.json(), status=status.HTTP_200_OK)
@@ -142,12 +145,12 @@ def about_one(request, booking_uid):
                                         reservations.date_create.minute))
         reservations = model_to_dict(reservations)
         reservations.update({"date_create": date_create})
-        hotel = requests.get("https://hotels-payment-chernov.herokuapp.com/api/v1/hotel/status/{}".format(reservations["hotel_uid"]),
+        hotel = requests.get(f"http://{HOST_ADDRESS}:8005/api/v1/hotel/status/{{}}".format(reservations["hotel_uid"]),
                              cookies=request.COOKIES)  # нужно доделать
         if hotel.status_code == 200:
             hotel = hotel.json()
             reservations.update(hotel)
-        payBalance = requests.get("https://hotels-payment-chernov.herokuapp.com/api/v1/payment/status/{}".format(reservations["payment_uid"]),
+        payBalance = requests.get(f"http://{HOST_ADDRESS}:8005/api/v1/payment/status/{{}}".format(reservations["payment_uid"]),
                                   cookies=request.COOKIES)
         if payBalance.status_code == 200:
             payBalance = payBalance.json()
@@ -166,7 +169,7 @@ def filter_booking(request, date_start, date_end):
             return JsonResponse({'message': 'No content'}, status=status.HTTP_204_NO_CONTENT)
         for res in reservations:
             payBalance = requests.get(
-                "https://hotels-payment-chernov.herokuapp.com/api/v1/payment/status/{}".format(res["payment_uid"]),
+                f"http://{HOST_ADDRESS}:8005/api/v1/payment/status/{{}}".format(res["payment_uid"]),
                 cookies=request.COOKIES)
             if payBalance.status_code == 200:
                 payBalance = payBalance.json()
@@ -193,25 +196,25 @@ def all_hotels(request, hotel_uid):  # only user 'admin'
         reservations = json.loads(serializers.serialize('json', hotel_reservations))
         for res in reservations:
             payBalance = requests.get(
-                "https://hotels-payment-chernov.herokuapp.com/api/v1/payment/status/{}".format(res['fields'].get("payment_uid")),
+                f"http://{HOST_ADDRESS}:8005/api/v1/payment/status/{{}}".format(res['fields'].get("payment_uid")),
                 cookies=request.COOKIES)
             if payBalance.status_code == 200:
                 payBalance = payBalance.json()
                 res['fields'].update(payBalance)
             about_hotel = requests.get(
-                "https://hotels-hotel-chernov.herokuapp.com/api/v1/hotels/{}".format(res['fields'].get("hotel_uid")),
+                f"http://{HOST_ADDRESS}:8005/api/v1/hotels/{{}}".format(res['fields'].get("hotel_uid")),
                 cookies=request.COOKIES)
             if about_hotel.status_code == 200:
                 about_hotel = about_hotel.json()
                 res['fields'].update(about_hotel)
             user = requests.get(
-                "https://hotels-session-chernov.herokuapp.com/api/v1/session/user/{}".format(res['fields'].get("user_uid")),
+                f"http://{HOST_ADDRESS}:8005/api/v1/session/user/{{}}".format(res['fields'].get("user_uid")),
                 cookies=request.COOKIES)
             if user.status_code == 200:
                 user = user.json()
                 res['fields'].update(user)
             loyalty = requests.get(
-                "https://hotels-loyalty-chernov.herokuapp.com/api/v1/loyalty/status/{}".format(res['fields'].get("user_uid")),
+                f"http://{HOST_ADDRESS}:8005/api/v1/loyalty/status/{{}}".format(res['fields'].get("user_uid")),
                 cookies=request.COOKIES)
             if loyalty.status_code == 200:
                 loyalty = loyalty.json()
@@ -239,25 +242,25 @@ def all_hotels_statics(request):  # only user 'admin'
         reservations = json.loads(serializers.serialize('json', hotel_reservations))
         for res in reservations:
             payBalance = requests.get(
-                "https://hotels-payment-chernov.herokuapp.com/api/v1/payment/status/{}".format(res['fields'].get("payment_uid")),
+                f"http://{HOST_ADDRESS}:8005/api/v1/payment/status/{{}}".format(res['fields'].get("payment_uid")),
                 cookies=request.COOKIES)
             if payBalance.status_code == 200:
                 payBalance = payBalance.json()
                 res['fields'].update(payBalance)
             about_hotel = requests.get(
-                "https://hotels-hotel-chernov.herokuapp.com/api/v1/hotels/{}".format(res['fields'].get("hotel_uid")),
+                f"http://{HOST_ADDRESS}:8005/api/v1/hotels/{{}}".format(res['fields'].get("hotel_uid")),
                 cookies=request.COOKIES)
             if about_hotel.status_code == 200:
                 about_hotel = about_hotel.json()
                 res['fields'].update(about_hotel)
             user = requests.get(
-                "https://hotels-session-chernov.herokuapp.com/api/v1/session/user/{}".format(res['fields'].get("user_uid")),
+                f"http://{HOST_ADDRESS}:8005/api/v1/session/user/{{}}".format(res['fields'].get("user_uid")),
                 cookies=request.COOKIES)
             if user.status_code == 200:
                 user = user.json()
                 res['fields'].update(user)
             loyalty = requests.get(
-                "https://hotels-loyalty-chernov.herokuapp.com/api/v1/loyalty/status/{}".format(res['fields'].get("user_uid")),
+                f"http://{HOST_ADDRESS}:8005/api/v1/loyalty/status/{{}}".format(res['fields'].get("user_uid")),
                 cookies=request.COOKIES)
             if loyalty.status_code == 200:
                 loyalty = loyalty.json()

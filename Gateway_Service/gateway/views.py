@@ -29,7 +29,7 @@ FAILURES = 3
 TIMEOUT = 6
 
 # Time zone
-tz_MOS = pytz.timezone('Europe/Moscow')
+tz_MOS = pytz.timezone('Asia/Seoul')
 
 # Kafka
 conf = {
@@ -546,7 +546,7 @@ def index(request):
     _allhotels = requests.get(f"http://{HOST_ADDRESS}:8004/api/v1/hotels", cookies=request.COOKIES).json()
 
     if len(_allhotels) != 0:
-        title = "Amazing Sky Hotels"
+        title = "호텔 목록"
         paginator = Paginator(_allhotels, 10)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -554,7 +554,7 @@ def index(request):
                                                   'title': title, 'user': data})
 
     else:
-        title = "Нет отелей :("
+        title = "예약 가능한 호텔이 없습니다."
         response = render(request, 'index.html', {'title': title, 'cities': cities, 'user': data})
 
     response.set_cookie(key='jwt', value=session.cookies.get('jwt'), httponly=True) \
@@ -783,8 +783,8 @@ def search_hotel_booking(request):
         if datetime.datetime.strptime(request.POST['date_start'], "%Y-%m-%d") > datetime.datetime.strptime(
                 request.POST['date_end'], "%Y-%m-%d") or \
                 datetime.datetime.strptime(request.POST['date_start'], "%Y-%m-%d") < datetime.datetime.now():
-            title = "Invalid Date Entry!"
-            response = render(request, 'index.html', {'title': title, 'cities': cities(request), 'user': user})
+            title = "이전 날짜는 검색이 불가능합니다! 다시 검색하세요."
+            response = render(request, 'index.html', {'title': title, 'user': user})
         else:
             search = requests.post(f"http://{HOST_ADDRESS}:8004/api/v1/hotels/date",
                                    json={"date_start": data["date_start"],
@@ -1090,11 +1090,11 @@ def registration(request):
         form = UserRegistrationForm(request.POST)
         # validation
         if form.data['password'] != form.data['password2']:
-            return render(request, 'signup.html', {'form': form, 'error': 'Password mismatch'})
+            return render(request, 'signup.html', {'form': form, 'error': '패스워드가 일치하지 않습니다.'})
         if not re.compile("^([A-Za-z0-9]+)+$").match(form.data['username']):
-            return render(request, 'signup.html', {'form': form, 'error': 'No valid login'})
+            return render(request, 'signup.html', {'form': form, 'error': '로그인 실패'})
         if len(request.FILES) == 0:
-            return render(request, 'signup.html', {'form': form, 'error': 'No Photo'})
+            return render(request, 'signup.html', {'form': form, 'error': '프로필 사진이 없습니다.'})
         # сохраним фото в gateway/static/images/avatars
         filename = ''.join(choices(ascii_letters + digits, k=10)) + '.jpg'
         with open(f'gateway/static/images/avatars/{filename}', 'wb') as image:
@@ -1107,7 +1107,8 @@ def registration(request):
         error = 'success'
         if session.status_code != 200:
             session = session.content.decode('utf8').replace("'", '"')
-            error = "email is not unique" if 'email' in session else "username is not unique"
+            error = "이미 존재하는 이메일입니다." if 'email' in session else "이미 존재하는 아이디입니다."
+            return render(request, 'index.html')
 
     return render(request, 'signup.html', {'form': form, 'error': error})
 

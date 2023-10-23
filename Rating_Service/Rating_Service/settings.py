@@ -26,7 +26,7 @@ JWT_KEY = 'django-insecure-0em@nl6y-bw)fmz*%2o!gr-b8c3%gata45=w_wg0p01qjp=j#7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

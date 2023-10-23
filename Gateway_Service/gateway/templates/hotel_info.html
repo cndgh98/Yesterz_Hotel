@@ -22,35 +22,35 @@
                     <div class="col-6">
                         <table class = "table">
                             <tr>
-                                <th scope="col" class="w-25" style="border: none;">Description:</th>
+                                <th scope="col" class="w-25" style="border: none;">호텔 정보:</th>
                                 <td class="text-wrap" style="border: none;">{{ hotel_info.short_text }}</td>
                             </tr>
                             <tr>
-                                <th scope="col" class="w-25">City:</th>
+                                <th scope="col" class="w-25">지역:</th>
                                 <td>{{ hotel_info.cities }}</td>
                             </tr>
                             <tr>
-                                <th scope="col" class="w-25">Addres:</th>
+                                <th scope="col" class="w-25">주소:</th>
                                 <td>{{ hotel_info.location }}</td>
                             </tr>
                             <tr>
-                                <th scope="col" class="w-25">Capacity:</th>
-                                <td>{{ hotel_info.rooms }} rooms</td>
+                                <th scope="col" class="w-25">객실 수:</th>
+                                <td>{{ hotel_info.rooms }} 개</td>
                             </tr>
                             <tr>
-                                <th scope="col" class="w-25">The cost:</th>
+                                <th scope="col" class="w-25">비용:</th>
                                 <td>{{ hotel_info.cost }}</td>
                             </tr>
                         </table>
                         {% if request.COOKIES.jwt %}
-                            <button class="btn btn-outline-secondary" id="example_2_2" onclick=" document.getElementById('example_2').style.display='none'; document.getElementById('example_2_2').style.display='none'; document.getElementById('example_2_1').style.display='block';" style="display:none;">Cancel</button>
-                            <button class="btn btn-outline-primary" id="example_2_1" onclick="document.getElementById('example_2').style.display='block'; document.getElementById('example_2_1').style.display='none'; document.getElementById('example_2_2').style.display='block';">Reserve</button>
+                            <button class="btn btn-outline-secondary" id="example_2_2" onclick=" document.getElementById('example_2').style.display='none'; document.getElementById('example_2_2').style.display='none'; document.getElementById('example_2_1').style.display='block';" style="display:none;">취소</button>
+                            <button class="btn btn-outline-primary" id="example_2_1" onclick="document.getElementById('example_2').style.display='block'; document.getElementById('example_2_1').style.display='none'; document.getElementById('example_2_2').style.display='block';">예약하기</button>
                         {% else %}
                             <p>
-                                <a href="{% url 'login' %}">Login</a>
-                                or
-                                <a href="{% url 'signup' %}">register</a>
-                                , to reserve the room!
+                                <a href="{% url 'login' %}">로그인</a>
+                                또는
+                                <a href="{% url 'signup' %}">회원가입</a>
+                                후 예약 가능합니다!
                             </p>
                         {% endif %}
                     </div>
@@ -99,7 +99,7 @@
                             <label>Comment</label>
                             <input type="text" name="comment" id="comment" class="form-control"><br>
                             <input type="hidden" name="price" value="{{ hotel_info.cost }}">
-                            <input type="submit" class="btn btn-primary" value="Reserve">
+                            <input type="submit" class="btn btn-primary" value="예약하기">
                         </form>
                     </div>
                         {% if dateerror %}

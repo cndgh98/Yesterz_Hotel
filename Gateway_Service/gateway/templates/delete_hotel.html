@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    Delete hotel
+    호텔 삭제
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
             <thead>
             <tr>
                 <th style="border-color: white;" colspan="3">
-                    <h3 style="text-align: center">Delete hotel</h3>
+                    <h3 style="text-align: center">호텔 삭제</h3>
                 </th>
             </tr>
             </thead>
@@ -20,7 +20,7 @@
                 <td>
                     <div style="margin: 10px;">
                         {% if error == 'success' %}
-                            <div class="alert alert-success"> Deleted </div>
+                            <div class="alert alert-success"> 삭제 완료 </div>
                         {% elif error %}
                             <div class="alert alert-danger">{{ error }}</div>
                         {% endif %}
@@ -37,7 +37,7 @@
                             </fieldset>
                             <div class="flex-box my-4">
                                 <button type="submit" class="btn btn-danger">
-                                    Delete
+                                    삭제하기
                                 </button>
                             </div>
                         </form>

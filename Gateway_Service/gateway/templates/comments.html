@@ -9,16 +9,16 @@
         <form role="form" method="post">
             {% csrf_token %}
             {{ form.comment_text }}<br>
-            <button type="submit" class="btn btn-outline-primary">Comment</button>
+            <button type="submit" class="btn btn-outline-primary">댓글</button>
             <br>
             <br>
         </form>
 {% else %}
     <p>
-        <a href="{% url 'login' %}">Login</a>
-        or
-        <a href="{% url 'signup' %}">register</a>
-        , to comment!
+        <a href="{% url 'login' %}">로그인</a>
+        또는
+        <a href="{% url 'signup' %}">회원가입</a>
+        후 댓글 쓰기가 가능합니다!
     </p>
 {% endif %}
 <div id = "commentblock">

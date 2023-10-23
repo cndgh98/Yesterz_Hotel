@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block title %}
-    All booking hotel
+   전체 예약 호텔 목록
 {% endblock %}
 
 {% block content %}
     <div class="container">
-        <h3 class="text-center" style="margin-top: 30px; font-weight: bold">All booking hotel</h3>
+        <h3 class="text-center" style="margin-top: 30px; font-weight: bold">전체 예약 호텔 목록</h3>
             {% if uid %}
                 <form method="post">
                     {% csrf_token %}
@@ -21,9 +21,9 @@
                         <div>
                             <label>Booking status:</label>
                             <select class="btn btn-outline-secondary mx-2" id="selecttheme" style="height: 40px">
-                                <option value="all" onclick="document.getElementById('status').value='all';">All</option>
-                                <option value="N/p" onclick="document.getElementById('status').value='new/paid';">New/paid</option>
-                                <option value="C/r" onclick="document.getElementById('status').value='canceled/reversed';">Canceled/reversed</option>
+                                <option value="all" onclick="document.getElementById('status').value='all';">전체</option>
+                                <option value="N/p" onclick="document.getElementById('status').value='new/paid';">신규/결제</option>
+                                <option value="C/r" onclick="document.getElementById('status').value='canceled/reversed';">취소/예약</option>
                             </select>
                         </div>
                         <input type="hidden" name="status" id="status" class="form-control" value="all">
@@ -43,9 +43,9 @@
                         <div>
                             <label>Booking status:</label>
                             <select class="btn btn-info mx-2" id="selecttheme" style="height: 40px">
-                                <option value="all" onclick="document.getElementById('status').value='all';">All</option>
-                                <option value="N/p" onclick="document.getElementById('status').value='new/paid';">New/paid</option>
-                                <option value="C/r" onclick="document.getElementById('status').value='canceled/reversed';">Canceled/reversed</option>
+                                <option value="all" onclick="document.getElementById('status').value='all';">전체</option>
+                                <option value="N/p" onclick="document.getElementById('status').value='new/paid';">신규/결제</option>
+                                <option value="C/r" onclick="document.getElementById('status').value='canceled/reversed';">취소/예약</option>
                             </select>
                         </div>
                         <input type="hidden" name="status" id="status" class="form-control" value="all">

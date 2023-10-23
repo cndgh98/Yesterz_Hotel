@@ -9,9 +9,12 @@ import requests
 import json
 import jwt
 import sys
+import os
 
 FAILURES = 3
 TIMEOUT = 6
+
+HOST_ADDRESS = os.environ.get('HOST_ADDRESS')
 
 # Kafka
 conf = {
@@ -72,7 +75,7 @@ def report_by_hotels(request):
     """
     try:
         auth(request)
-        hotels = requests.get("https://hotels-booking-chernov.herokuapp.com/api/v1/booking/static", cookies=request.COOKIES)
+        hotels = requests.get(f"https://{HOST_ADDRESS}:8005/api/v1/booking/static", cookies=request.COOKIES)
         if hotels.status_code == 200:
             hotels = hotels.content.decode('utf8').replace("'", '"')
             hotels = json.loads(hotels)

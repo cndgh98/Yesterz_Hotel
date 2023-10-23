@@ -11,9 +11,13 @@ from .models import Hotels
 import requests
 import json
 import jwt
+import re
+import os
 
 FAILURES = 3
 TIMEOUT = 6
+
+HOST_ADDRESS = os.environ.get('HOST_ADDRESS')
 
 
 # API
@@ -31,10 +35,10 @@ def about_or_delete(request, hotel_uid):
             data = auth(request)
             if 'admin' not in data['role']:
                 return JsonResponse({'detail': 'You are not admin!'}, status=status.HTTP_400_BAD_REQUEST)
-            hotel_likes = requests.delete("http://localhost:8007/api/v1/rating/delete_hotel",
+            hotel_likes = requests.delete(f"http://{HOST_ADDRESS}:8007/api/v1/rating/delete_hotel",
                                json={'hotel_uid': hotel_uid},
                                cookies=request.COOKIES)
-            hotel_comments = requests.delete("http://localhost:8007/api/v1/rating/delete_all_comments",
+            hotel_comments = requests.delete(f"http://{HOST_ADDRESS}:8007/api/v1/rating/delete_all_comments",
                                json={'hotel_uid': hotel_uid},
                                cookies=request.COOKIES)
             if hotel_comments.status_code != 204:
@@ -81,7 +85,7 @@ def all_hotels_or_add_hotel(request):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             hotel = model_to_dict(Hotels.objects.latest('id'))
-            hotel_likes = requests.post("http://localhost:8007/api/v1/rating/create_hotel",
+            hotel_likes = requests.post(f"http://{HOST_ADDRESS}:8007/api/v1/rating/create_hotel",
                                json={"hotel_uid": str(hotel['hotel_uid'])},
                                cookies=request.COOKIES)
             if hotel_likes.status_code != 201:
@@ -115,7 +119,7 @@ def filter_date(request):
     """
     try:
         if "date_start" and "date_end" in request.data.keys():
-            filter_booking = requests.get("https://hotels-booking-chernov.herokuapp.com/api/v1/booking/date/{}/{}".
+            filter_booking = requests.get(f"http://{HOST_ADDRESS}/api/v1/booking/date/{{}}/{{}}".
                                           format(request.data["date_start"], request.data["date_end"]),
                                           cookies=request.COOKIES)
             if filter_booking.status_code == 204:

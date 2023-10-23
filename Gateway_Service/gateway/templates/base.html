@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>
         {% block title %}
-            Hotels
+            Yesterz_Hotel
         {% endblock %}
     </title>
     <link rel="shortcut icon" href="https://img.icons8.com/officel/30/000000/share.png" type="image/png">
@@ -19,7 +19,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container col-md-7">
             <a class="navbar-brand" title="Все вопросы" href="{% url 'index' %}" style="font-size: 24px;">
-                <img class="py-2 px-1" src="https://img.icons8.com/officel/30/000000/share.png" alt="Аватар"> Sky Hotel
+                <img class="py-2 px-1" src="https://img.icons8.com/officel/30/000000/share.png" alt="Аватар"> Yesterz 호텔 예약 시스템
             </a>
         </div>
 
@@ -28,7 +28,7 @@
             {% if request.COOKIES.jwt %}
                 {% if user.role == 'admin' %}
                     <div class="col-3 mr-4 ml-auto">
-                        <a href="{%url 'admin'%}" role="button" class="btn btn-outline-dark">Admin</a>
+                        <a href="{%url 'admin'%}" role="button" class="btn btn-outline-dark">관리자 전용</a>
                     </div>
                 {% endif %}
                 <div class="col-2 mr-4 ml-auto">
@@ -49,22 +49,22 @@
                     </div>
                 {% else %}
                     <div class="mr-4">
-                        <b>NoName</b>
+                        <b>게스트</b>
                     </div>
                 {% endif %}
 
                 <div class="row">
                     {% if request.COOKIES.jwt %}
                         <div class="col mr-4 col-np">
-                            <a href="{%url 'logout'%}">Logout</a>
+                            <a href="{%url 'logout'%}">로그아웃</a>
                         </div>
                     {% else %}
                         <div class="col mr-2 col-np">
-                            <a href="{%url 'login'%}">Log in</a>
+                            <a href="{%url 'login'%}">로그인</a>
                         </div>
 
                         <div class="col mr-2 col-np">
-                            <a href="{%url 'signup'%}">Register</a>
+                            <a href="{%url 'signup'%}">회원가입</a>
                         </div>
                     {% endif %}
                 </div>
@@ -89,7 +89,7 @@
     <div class="footer text-center">
         <div class="container" style="padding 100px;">
         <p class="top-cover">
-            &copy; Copyright Ivan Chernov
+            예스터즈 
         </p>
             </div>
     </div>

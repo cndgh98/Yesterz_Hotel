@@ -119,7 +119,7 @@ def filter_date(request):
     """
     try:
         if "date_start" and "date_end" in request.data.keys():
-            filter_booking = requests.get(f"http://{HOST_ADDRESS}/api/v1/booking/date/{{}}/{{}}".
+            filter_booking = requests.get(f"http://{HOST_ADDRESS}:8003/api/v1/booking/date/{{}}/{{}}".
                                           format(request.data["date_start"], request.data["date_end"]),
                                           cookies=request.COOKIES)
             if filter_booking.status_code == 204:
@@ -175,7 +175,7 @@ def filter_date(request):
                 hotel.update({"free_rooms": hotel['rooms'] - count_rooms})
             hotels = hotels
             return JsonResponse(hotels, status=status.HTTP_200_OK, safe=False)
-        return JsonResponse({'message': 'No content'}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'message': 'No contentTwst'}, status=status.HTTP_204_NO_CONTENT)
     except Exception as e:
         return JsonResponse({'message': '{}'.format(e)}, status=status.HTTP_400_BAD_REQUEST)
 

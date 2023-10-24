@@ -791,9 +791,7 @@ def search_hotel_booking(request):
                                          "date_end": data["date_end"],
                                          "city": data["city"]}, cookies=request.COOKIES)
             if len(search.json()) != 0:
-                title = "Available hotels in the city " + str(data["city"]) + " from " + str(
-                    data["date_start"]) + " to " + str(data["date_end"])
-
+                title = str(data["city"]) + " 예약 가능 호텔 목록" + "(" + str(data["date_start"]) + " ~ " + str(data["date_end"] + ")")
                 paginator = Paginator(search.json(), 10)
                 page_number = request.GET.get('page')
                 page_obj = paginator.get_page(page_number)

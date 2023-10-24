@@ -92,11 +92,11 @@
                         <form action="{% url 'add_booking' %}" method="post">
                             {% csrf_token %}
                             <input type="hidden" name="hotel_uid" value="{{ hotel_info.hotel_uid }}">
-                            <label>Arrival date</label>
+                            <label>출발 날짜</label>
                             <input type="date" name="date_start" id="date_start" class="form-control" required><br>
-                            <label>Departure date</label>
+                            <label>도착 날짜</label>
                             <input type="date" name="date_end" id="date_end" class="form-control" required><br>
-                            <label>Comment</label>
+                            <label>요청 사항</label>
                             <input type="text" name="comment" id="comment" class="form-control"><br>
                             <input type="hidden" name="price" value="{{ hotel_info.cost }}">
                             <input type="submit" class="btn btn-primary" value="예약하기">

@@ -75,7 +75,7 @@ def report_by_hotels(request):
     """
     try:
         auth(request)
-        hotels = requests.get(f"https://{HOST_ADDRESS}:8005/api/v1/booking/static", cookies=request.COOKIES)
+        hotels = requests.get(f"http://{HOST_ADDRESS}:8005/api/v1/booking/static", cookies=request.COOKIES)
         if hotels.status_code == 200:
             hotels = hotels.content.decode('utf8').replace("'", '"')
             hotels = json.loads(hotels)

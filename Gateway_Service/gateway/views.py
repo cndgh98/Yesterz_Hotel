@@ -689,6 +689,12 @@ def pay_room(request, payment_uid):
         date_end = datetime.datetime.strptime(booking['date_end'], "%Y-%m-%d")
         period = date_end - date_start
         totalcost = int(hotel['cost']) * (period.days)
+        filter_booking = requests.get(f"http://{HOST_ADDRESS}:8003/api/v1/booking/date/{date_start}/{date_end}", cookies=session.cookies).json()
+        if len(filter_booking) >= 2:
+            error = "Failed to pay!"
+            response = render(request, 'user_booking.html',
+                      {'booking': booking, 'hotel': hotel, 'payment': payment, 'error': error, 'user': data, \
+                       'cities': cities, 'totalcost': request.POST['totalcost']})
         pay = requests.post(f"http://{HOST_ADDRESS}:8002/api/v1/payment/pay/{payment_uid}", json={'price': totalcost}, cookies=request.COOKIES)
         if pay.status_code == 200:
             response = HttpResponseRedirect('/booking_info/{}'.format(request.POST['booking_uid']))

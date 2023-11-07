@@ -37,60 +37,60 @@ phases:
       - docker tag yesterz-gateway $ECR_REPO_URI:gateway-1.0
       - docker push $ECR_REPO_URI:gateway-1.0
       - cat ./Gateway_Service/Dockerfile
-      # - sed -i "s/change-db-name/$DB_NAME/g" ./Booking_Service/Dockerfile
-      # - sed -i "s/change-db-user/$DB_USER/g" ./Booking_Service/Dockerfile
-      # - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Booking_Service/Dockerfile
-      # - sed -i "s/change-db-host/$DB_HOST/g" ./Booking_Service/Dockerfile
-      # - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Booking_Service/Dockerfile
-      # - docker build -t yesterz-booking ./Booking_Service
-      # - docker tag yesterz-booking $ECR_REPO_URI:booking-1.0
-      # - docker push $ECR_REPO_URI:booking-1.0
-      # - sed -i "s/change-db-name/$DB_NAME/g" ./Hotel_Service/Dockerfile
-      # - sed -i "s/change-db-user/$DB_USER/g" ./Hotel_Service/Dockerfile
-      # - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Hotel_Service/Dockerfile
-      # - sed -i "s/change-db-host/$DB_HOST/g" ./Hotel_Service/Dockerfile
-      # - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Hotel_Service/Dockerfile
-      # - docker build -t yesterz-hotel ./Hotel_Service
-      # - docker tag yesterz-hotel $ECR_REPO_URI:hotel-1.0
-      # - docker push $ECR_REPO_URI:hotel-1.0
-      # - sed -i "s/change-db-name/$DB_NAME/g" ./Loyalty_Service/Dockerfile
-      # - sed -i "s/change-db-user/$DB_USER/g" ./Loyalty_Service/Dockerfile
-      # - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Loyalty_Service/Dockerfile
-      # - sed -i "s/change-db-host/$DB_HOST/g" ./Loyalty_Service/Dockerfile
-      # - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Loyalty_Service/Dockerfile
-      # - docker build -t yesterz-loyalty ./Loyalty_Service
-      # - docker tag yesterz-loyalty $ECR_REPO_URI:loyalty-1.0
-      # - docker push $ECR_REPO_URI:loyalty-1.0
-      # - sed -i "s/change-db-name/$DB_NAME/g" ./Payment_Service/Dockerfile
-      # - sed -i "s/change-db-user/$DB_USER/g" ./Payment_Service/Dockerfile
-      # - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Payment_Service/Dockerfile
-      # - sed -i "s/change-db-host/$DB_HOST/g" ./Payment_Service/Dockerfile
-      # - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Payment_Service/Dockerfile
-      # - docker build -t yesterz-payment ./Payment_Service
-      # - docker tag yesterz-payment $ECR_REPO_URI:payment-1.0
-      # - docker push $ECR_REPO_URI:payment-1.0
-      # - sed -i "s/change-db-name/$DB_NAME/g" ./Report_Service/Dockerfile
-      # - sed -i "s/change-db-user/$DB_USER/g" ./Report_Service/Dockerfile
-      # - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Report_Service/Dockerfile
-      # - sed -i "s/change-db-host/$DB_HOST/g" ./Report_Service/Dockerfile
-      # - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Report_Service/Dockerfile
-      # - docker build -t yesterz-report ./Report_Service
-      # - docker tag yesterz-report $ECR_REPO_URI:report-1.0
-      # - docker push $ECR_REPO_URI:report-1.0
-      # - sed -i "s/change-db-name/$DB_NAME/g" ./Session_Service/Dockerfile
-      # - sed -i "s/change-db-user/$DB_USER/g" ./Session_Service/Dockerfile
-      # - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Session_Service/Dockerfile
-      # - sed -i "s/change-db-host/$DB_HOST/g" ./Session_Service/Dockerfile
-      # - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Session_Service/Dockerfile
-      # - docker build -t yesterz-session ./Session_Service
-      # - docker tag yesterz-session $ECR_REPO_URI:session-1.0
-      # - docker push $ECR_REPO_URI:session-1.0
-      # - sed -i "s/change-db-name/$DB_NAME/g" ./Rating_Service/Dockerfile
-      # - sed -i "s/change-db-user/$DB_USER/g" ./Rating_Service/Dockerfile
-      # - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Rating_Service/Dockerfile
-      # - sed -i "s/change-db-host/$DB_HOST/g" ./Rating_Service/Dockerfile
-      # - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Rating_Service/Dockerfile
-      # - docker build -t yesterz-rating ./Rating_Service
-      # - docker tag yesterz-rating $ECR_REPO_URI:rating-1.0
-      # - docker push $ECR_REPO_URI:rating-1.0
+      - sed -i "s/change-db-name/$DB_NAME/g" ./Booking_Service/Dockerfile
+      - sed -i "s/change-db-user/$DB_USER/g" ./Booking_Service/Dockerfile
+      - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Booking_Service/Dockerfile
+      - sed -i "s/change-db-host/$DB_HOST/g" ./Booking_Service/Dockerfile
+      - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Booking_Service/Dockerfile
+      - docker build -t yesterz-booking ./Booking_Service
+      - docker tag yesterz-booking $ECR_REPO_URI:booking-1.0
+      - docker push $ECR_REPO_URI:booking-1.0
+      - sed -i "s/change-db-name/$DB_NAME/g" ./Hotel_Service/Dockerfile
+      - sed -i "s/change-db-user/$DB_USER/g" ./Hotel_Service/Dockerfile
+      - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Hotel_Service/Dockerfile
+      - sed -i "s/change-db-host/$DB_HOST/g" ./Hotel_Service/Dockerfile
+      - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Hotel_Service/Dockerfile
+      - docker build -t yesterz-hotel ./Hotel_Service
+      - docker tag yesterz-hotel $ECR_REPO_URI:hotel-1.0
+      - docker push $ECR_REPO_URI:hotel-1.0
+      - sed -i "s/change-db-name/$DB_NAME/g" ./Loyalty_Service/Dockerfile
+      - sed -i "s/change-db-user/$DB_USER/g" ./Loyalty_Service/Dockerfile
+      - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Loyalty_Service/Dockerfile
+      - sed -i "s/change-db-host/$DB_HOST/g" ./Loyalty_Service/Dockerfile
+      - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Loyalty_Service/Dockerfile
+      - docker build -t yesterz-loyalty ./Loyalty_Service
+      - docker tag yesterz-loyalty $ECR_REPO_URI:loyalty-1.0
+      - docker push $ECR_REPO_URI:loyalty-1.0
+      - sed -i "s/change-db-name/$DB_NAME/g" ./Payment_Service/Dockerfile
+      - sed -i "s/change-db-user/$DB_USER/g" ./Payment_Service/Dockerfile
+      - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Payment_Service/Dockerfile
+      - sed -i "s/change-db-host/$DB_HOST/g" ./Payment_Service/Dockerfile
+      - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Payment_Service/Dockerfile
+      - docker build -t yesterz-payment ./Payment_Service
+      - docker tag yesterz-payment $ECR_REPO_URI:payment-1.0
+      - docker push $ECR_REPO_URI:payment-1.0
+      - sed -i "s/change-db-name/$DB_NAME/g" ./Report_Service/Dockerfile
+      - sed -i "s/change-db-user/$DB_USER/g" ./Report_Service/Dockerfile
+      - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Report_Service/Dockerfile
+      - sed -i "s/change-db-host/$DB_HOST/g" ./Report_Service/Dockerfile
+      - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Report_Service/Dockerfile
+      - docker build -t yesterz-report ./Report_Service
+      - docker tag yesterz-report $ECR_REPO_URI:report-1.0
+      - docker push $ECR_REPO_URI:report-1.0
+      - sed -i "s/change-db-name/$DB_NAME/g" ./Session_Service/Dockerfile
+      - sed -i "s/change-db-user/$DB_USER/g" ./Session_Service/Dockerfile
+      - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Session_Service/Dockerfile
+      - sed -i "s/change-db-host/$DB_HOST/g" ./Session_Service/Dockerfile
+      - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Session_Service/Dockerfile
+      - docker build -t yesterz-session ./Session_Service
+      - docker tag yesterz-session $ECR_REPO_URI:session-1.0
+      - docker push $ECR_REPO_URI:session-1.0
+      - sed -i "s/change-db-name/$DB_NAME/g" ./Rating_Service/Dockerfile
+      - sed -i "s/change-db-user/$DB_USER/g" ./Rating_Service/Dockerfile
+      - sed -i "s/change-db-password/$DB_PASSWORD/g" ./Rating_Service/Dockerfile
+      - sed -i "s/change-db-host/$DB_HOST/g" ./Rating_Service/Dockerfile
+      - sed -i "s/change-host-address/$HOST_ADDRESS/g" ./Rating_Service/Dockerfile
+      - docker build -t yesterz-rating ./Rating_Service
+      - docker tag yesterz-rating $ECR_REPO_URI:rating-1.0
+      - docker push $ECR_REPO_URI:rating-1.0
 

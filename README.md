@@ -1,6 +1,8 @@
 # Yesterz Hotel Booking
 - 원본 코드 : [원본 Github 바로가기](https://github.com/Blackbackofficial/Hotel-Booking)
 - 코드 사용 목적 : 본 프로젝트는 경기도 일자리 재단에서 진행한 '클라우드 운영 전무가' 교육 과정에서 AWS 설계프로젝트에 사용을 위해서 수정된 코드입니다. 
+## 서비스 아키텍쳐 구성도
+![image](https://github.com/user-attachments/assets/f624c49f-d559-405a-9bf2-c171b638f3c5)
 
 ## 서비스 설명
 
